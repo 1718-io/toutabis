@@ -4,10 +4,10 @@
 # Will generate 
 
 # parameters
-SERVICE_NAME=${2:-"pocket-id"}
-DOMAIN=${1:-"pesto.io"}
+SERVICE_NAME=${1:-"pocket-id"}
+DOMAIN=${2:-"pesto.io"}
 DOMAIN_URL="https://${SERVICE_NAME}.${DOMAIN}"
-CERTS_DIR="certs"
+CERTS_DIR=${3:-"caddy/certs"}
 CERT_PEM_FILE="${CERTS_DIR}/local.cert.pem"
 KEY_PEM_FILE="${CERTS_DIR}/local.key.pem"
 
