@@ -1,6 +1,6 @@
 # Overview
 
-Celtic Voices is a community-driven content sharing platform that allows users to publish and interact with various types of contributions including stories, insights, tips, questions, and discussions. The application features a modern full-stack architecture with React frontend, Express backend, and PostgreSQL database integration through Drizzle ORM. The platform supports both authenticated and anonymous users, with Replit OAuth integration for registered users.
+Toutabis is a community-driven content sharing platform that allows users to publish and interact with various types of contributions including stories, insights, tips, questions, and discussions. The application features a modern full-stack architecture with React frontend, Express backend, and PostgreSQL database integration through Drizzle ORM. The platform supports both authenticated and anonymous users, with Replit OAuth integration for registered users.
 
 # User Preferences
 

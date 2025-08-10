@@ -16,7 +16,7 @@ export function useLanguage() {
     const translations: Record<Language, Record<string, string>> = {
       en: {
         // Header
-        'site.title': 'Celtic Voices',
+        'site.title': 'Toutabis',
         'site.tagline': 'Share Your Story',
         'nav.home': 'Home',
         'nav.contributions': 'Contributions',
@@ -76,7 +76,7 @@ export function useLanguage() {
         'footer.description': 'A community platform where every voice matters. Share your thoughts, insights, and stories with fellow members from around the world in a welcoming, Celtic-inspired environment.',
         'footer.quick_links': 'Quick Links',
         'footer.support': 'Support',
-        'footer.copyright': '© 2024 Celtic Voices. All rights reserved. Made with ❤️ for the community.',
+        'footer.copyright': '© 2024 Toutabis. All rights reserved. Made with ❤️ for the community.',
         'footer.language_choice': 'Choose your language:',
         
         // Common
