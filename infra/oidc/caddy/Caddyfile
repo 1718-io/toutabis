@@ -1,0 +1,22 @@
+# defines the SSL cert/key files as a snippet to be reused.
+(ssl_certs) {
+	tls "/data/certs/local.cert.pem" "/data/certs/local.key.pem"
+}
+
+# host->container for the Pocket ID OIDC / IAM SErvice
+pocket-id.pesto.io {
+	import ssl_certs
+	reverse_proxy toutabis-pocket-id:1411
+}
+
+# host->container for the frontend webapp
+toutabis.pesto.io {
+	import ssl_certs
+	reverse_proxy toutabis:80
+}
+
+# host->container for the database endpoint
+db.pesto.io {
+	import ssl_certs
+	reverse_proxy toutabis-db:5342
+}

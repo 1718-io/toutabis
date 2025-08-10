@@ -1,10 +1,33 @@
 services:
+  # Reverse proxy using Caddy to route traffic to containers.
+  # See Caddyfile to configure subdomains to each container.       
+  # credits: https://github.com/josue/docker-caddy-reverse-proxy/blob/main/docker-compose.yml
+  reverse-proxy:
+    image: caddy/caddy:2-alpine
+    container_name: reverse-proxy
+    restart: unless-stopped
+    ports:
+        # - "80:80"
+        - "443:443"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+      - $PWD/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - $PWD/caddy/certs:/data/certs
+    networks:
+      - toutabis_net
+
   pocket-id:
     image: ghcr.io/pocket-id/pocket-id:v1
+    container_name: toutabis-pocket-id
     restart: unless-stopped
     env_file: .env
-    ports:
-      - 1411:1411
+    # ---
+    # will be expsoed only through the reverse proxy
+    expose:
+      - "1411"
+    # ports:
+    #   - 1411:1411
     volumes:
       - pocket_id_data:/app/data
       # - "./data:/app/data"
@@ -15,7 +38,31 @@ services:
       timeout: 5s
       retries: 2
       start_period: 10s
+    networks:
+      - toutabis_net
 
+  postgres:
+    image: postgres:14-alpine
+    container_name: toutabis-db
+    env_file: .env
+    ports:
+      - 5432:5432
+    volumes:
+      - pocket_db_data:/var/lib/postgresql/data
+      # - ~/apps/postgres:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=tout@bisS3cret
+      - POSTGRES_USER=toutabis_user
+      - POSTGRES_DB=toutabis_db
+    networks:
+      - toutabis_net
 
 volumes:
   pocket_id_data:
+  pocket_db_data:
+  caddy_data:
+  caddy_config:
+
+networks:
+  toutabis_net:
+    driver: bridge
